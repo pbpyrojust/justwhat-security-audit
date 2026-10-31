@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { pathToFileURL } from 'node:url';
 import fs from 'fs';
 import path from 'path';
 import { chromium } from 'playwright';
@@ -1149,7 +1150,7 @@ const dashboardHtml = buildSecurityDashboardHtml({ site, risk, sorted, primaryPl
 fs.writeFileSync(path.join(outDir, 'security-dashboard.html'), dashboardHtml, 'utf8');
 try {
   const reportPage = await context.newPage();
-  await reportPage.goto('file://' + path.join(outDir, 'security-dashboard.html'));
+  await reportPage.goto(pathToFileURL(path.join(outDir, 'security-dashboard.html')).href);
   await reportPage.pdf({ path: path.join(outDir, 'security-dashboard.pdf'), format: 'A4', printBackground: true, margin: { top: '20px', bottom: '20px', left: '20px', right: '20px' } });
   await reportPage.close();
   out(`Wrote: ${path.join(outDir, 'security-dashboard.pdf')}`);

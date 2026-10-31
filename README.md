@@ -4,6 +4,10 @@ Technical security & attack-surface audit CLI. Companion tool to [universal-seo-
 
 Runs a battery of unauthenticated, publicly-visible checks against a website and produces a risk-graded HTML/PDF dashboard, CSV data files, a ticket-ready backlog, and run-over-run comparisons.
 
+## What's new in 0.3.1
+
+- **Fix:** The HTML-to-PDF step opened `file://reports/...` when `--run-dir` was a relative path (an invalid address, so the PDF failed after the HTML was written); it now uses a proper file URL from the absolute path.
+
 ## What's new in 0.3.0
 
 - **Pentest checks need confirmed permission.** The active checks (exposed paths and admin/login pages, GraphQL introspection, subdomain liveness, the port scan, open-redirect/HTTP-method/user-enumeration/error-disclosure probes, and the authenticated admin audit) only run when you confirm you own the site or have the owner's written permission: `--authorized`, or typing "yes" at the prompt. Without it a run is passive only. The confirmation (exact statement, time, user, how) is saved in `summary.json` and `full-report.json`. **Scripts and CI that relied on the active checks need `--authorized` added.**
