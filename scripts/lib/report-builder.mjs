@@ -3,7 +3,7 @@
 // reports can be white-labeled the same way universal-seo-audit's generate-visual-report.mjs is. ──
 
 export const DEFAULT_BRANDING = {
-  companyName: 'Universal Security Audit',
+  companyName: 'JustWhat Security Audit',
   logo: '',
   primaryColor: '#ef4444',
   secondaryColor: '#0f172a',

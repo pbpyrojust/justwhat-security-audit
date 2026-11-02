@@ -311,7 +311,7 @@ fs.mkdirSync(outDir, { recursive: true });
 const auditStart = Date.now();
 out('');
 out(`  ${rainbow('╔══════════════════════════════════════════════════════════╗')}`);
-out(`  ${rainbow('║')}  ${c.bold}${c.brightRed}🛡  Universal Security Audit${c.reset}                          ${rainbow('║')}`);
+out(`  ${rainbow('║')}  ${c.bold}${c.brightRed}🛡  JustWhat Security Audit${c.reset}                           ${rainbow('║')}`);
 out(`  ${rainbow('║')}  ${c.dim}Attack Surface · Headers · CVEs · PII · Payments${c.reset}       ${rainbow('║')}`);
 out(`  ${rainbow('╚══════════════════════════════════════════════════════════╝')}`);
 out('');

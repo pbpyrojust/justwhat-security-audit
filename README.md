@@ -1,4 +1,4 @@
-# Universal Security Audit
+# JustWhat Security Audit
 
 Technical security & attack-surface audit CLI. Companion tool to [universal-seo-audit](../universal-seo-audit) and [universal-accessibility-audit](../universal-accessibility-audit) — same crawler/report/ticket/compare conventions, different lens.
 
@@ -23,7 +23,7 @@ Runs a battery of unauthenticated, publicly-visible checks against a website and
 
 ## Part of Vinny
 
-This scanner is the free, open-source engine behind the [security checks in Vinny](https://vinny.justwhat.net/features/#security). Everything here stays free. [Vinny](https://vinny.justwhat.net) runs the same header grading on a schedule for any website, alongside [accessibility](https://vinny.justwhat.net/features/#accessibility), [SEO and rank tracking](https://vinny.justwhat.net/features/#seo), with history, alerts and fix tickets ([free for one site](https://vinny.justwhat.net/pricing/)). For WordPress, the free [Universal Security Audit plugin](https://wordpress.justwhat.net/security-audit/) runs these checks from wp-admin (pentest-style checks only with recorded written permission), and Pro adds scheduled checks from outside run by Vinny, history, alerts and a client report.
+This scanner is the free, open-source engine behind the [security checks in Vinny](https://vinny.justwhat.net/features/#security). Everything here stays free. [Vinny](https://vinny.justwhat.net) runs the same header grading on a schedule for any website, alongside [accessibility](https://vinny.justwhat.net/features/#accessibility), [SEO and rank tracking](https://vinny.justwhat.net/features/#seo), with history, alerts and fix tickets ([free for one site](https://vinny.justwhat.net/pricing/)). For WordPress, the free [JustWhat Security Audit plugin](https://wordpress.justwhat.net/security-audit/) runs these checks from wp-admin (pentest-style checks only with recorded written permission), and Pro adds scheduled checks from outside run by Vinny, history, alerts and a client report.
 
 ## ⚠️ Authorized use only: pentest checks need written permission
 
