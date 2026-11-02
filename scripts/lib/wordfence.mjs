@@ -15,7 +15,7 @@ export const WORDFENCE_ATTRIBUTION = 'Vulnerability data: Wordfence Intelligence
 
 function cacheFile() {
   const base = process.env.XDG_CACHE_HOME || path.join(os.homedir(), '.cache');
-  return path.join(base, 'universal-security-audit', 'wordfence-index.json');
+  return path.join(base, 'justwhat-security-audit', 'wordfence-index.json');
 }
 
 /** -1, 0 or 1, comparing dotted versions number by number ("6.10.2" > "6.9.10"). */

@@ -1,6 +1,8 @@
 # JustWhat Security Audit
 
-Technical security & attack-surface audit CLI. Companion tool to [universal-seo-audit](../universal-seo-audit) and [universal-accessibility-audit](../universal-accessibility-audit) — same crawler/report/ticket/compare conventions, different lens.
+> Formerly `@pbpyrojust/universal-security-audit`. That package is deprecated in favour of this one; the old `universal-security-audit` command still works here too.
+
+Technical security & attack-surface audit CLI. Companion tool to [justwhat-seo-audit](../justwhat-seo-audit) and [justwhat-accessibility-audit](../justwhat-accessibility-audit) — same crawler/report/ticket/compare conventions, different lens.
 
 Runs a battery of unauthenticated, publicly-visible checks against a website and produces a risk-graded HTML/PDF dashboard, CSV data files, a ticket-ready backlog, and run-over-run comparisons.
 
@@ -13,7 +15,7 @@ Runs a battery of unauthenticated, publicly-visible checks against a website and
 - **Pentest checks need confirmed permission.** The active checks (exposed paths and admin/login pages, GraphQL introspection, subdomain liveness, the port scan, open-redirect/HTTP-method/user-enumeration/error-disclosure probes, and the authenticated admin audit) only run when you confirm you own the site or have the owner's written permission: `--authorized`, or typing "yes" at the prompt. Without it a run is passive only. The confirmation (exact statement, time, user, how) is saved in `summary.json` and `full-report.json`. **Scripts and CI that relied on the active checks need `--authorized` added.**
 - **Open redirect:** only a redirect whose destination is the test host counts. Sites that redirect www → apex (or http → https) keep the query string, which made every redirect parameter a false positive.
 - **WPScan:** a refused key (WPScan answers 403 for a missing or invalid token) now stops the lookups after the first one with one message.
-- **Wordfence Intelligence** as a second source of WordPress core/plugin/theme vulnerabilities, with your own free key (`--wordfence-key` or `WORDFENCE_API_KEY`). Only for sites detected as WordPress. The feed is downloaded at most once a day and kept as a compact index in `~/.cache/universal-security-audit/`; components WPScan already reported aren't repeated. See [WordPress CVE lookups](#wordpress-cve-lookups).
+- **Wordfence Intelligence** as a second source of WordPress core/plugin/theme vulnerabilities, with your own free key (`--wordfence-key` or `WORDFENCE_API_KEY`). Only for sites detected as WordPress. The feed is downloaded at most once a day and kept as a compact index in `~/.cache/justwhat-security-audit/`; components WPScan already reported aren't repeated. See [WordPress CVE lookups](#wordpress-cve-lookups).
 
 ## What's new in 0.2.0
 
@@ -113,15 +115,15 @@ This is the one part of the tool that requires you to hand it real credentials �
 
 ## Install
 
-From npm (`@pbpyrojust/universal-security-audit`):
+From npm (`@pbpyrojust/justwhat-security-audit`):
 
 ```bash
-npm install -g @pbpyrojust/universal-security-audit
+npm install -g @pbpyrojust/justwhat-security-audit
 npx playwright install chromium
-universal-security-audit --site https://www.example.com
+justwhat-security-audit --site https://www.example.com
 ```
 
-Or without installing: `npm exec --package @pbpyrojust/universal-security-audit -- universal-security-audit --site https://www.example.com`.
+Or without installing: `npm exec --package @pbpyrojust/justwhat-security-audit -- justwhat-security-audit --site https://www.example.com`.
 
 From a clone of this repository:
 
@@ -137,7 +139,7 @@ node scripts/run-security-audit.mjs --site https://www.example.com
 # or
 pnpm security-audit --site https://www.example.com
 # or, via the CLI wrapper
-node bin/universal-security-audit.mjs audit --site https://www.example.com
+node bin/justwhat-security-audit.mjs audit --site https://www.example.com
 ```
 
 ### Flags
@@ -200,7 +202,7 @@ node scripts/run-security-audit.mjs --site https://www.example.com \
 
 WordPress core/plugin/theme vulnerability matching only runs for sites detected as WordPress, and only with a key you supply. Two sources, use either or both:
 
-- **[Wordfence Intelligence](https://www.wordfence.com/threat-intel/)** (`WORDFENCE_API_KEY` or `--wordfence-key`): free for commercial and personal use with attribution; create a key at wordfence.com under Account → Integrations. The full feed (~160 MB) is downloaded at most once every 24 hours and kept as a compact index (~18 MB) in `~/.cache/universal-security-audit/wordfence-index.json` (or `$XDG_CACHE_HOME`); the key's download limit is small, so if a refresh is refused the cached copy is used. Findings credit Wordfence and Defiant Inc. as its license requires.
+- **[Wordfence Intelligence](https://www.wordfence.com/threat-intel/)** (`WORDFENCE_API_KEY` or `--wordfence-key`): free for commercial and personal use with attribution; create a key at wordfence.com under Account → Integrations. The full feed (~160 MB) is downloaded at most once every 24 hours and kept as a compact index (~18 MB) in `~/.cache/justwhat-security-audit/wordfence-index.json` (or `$XDG_CACHE_HOME`); the key's download limit is small, so if a refresh is refused the cached copy is used. Findings credit Wordfence and Defiant Inc. as its license requires.
 - **WPScan**: uses the [WPScan Vulnerability Database API](https://wpscan.com/api), which requires an API key — there's no shared/bundled key in this repo, so each user registers their own at wpscan.com. WPScan's free key is for non-commercial use; for client or commercial work use Wordfence or a paid WPScan plan. Set it either way:
 
 ```bash
@@ -233,7 +235,7 @@ Each run writes to `reports/<site>-<timestamp>/`:
 
 ## Reports, tickets, and comparisons
 
-Same workflow shape as `universal-seo-audit` / `universal-accessibility-audit`: the live audit produces raw data, and three standalone scripts turn it into deliverables — usable independently of a live scan, against any existing `reports/<run>` directory.
+Same workflow shape as `justwhat-seo-audit` / `justwhat-accessibility-audit`: the live audit produces raw data, and three standalone scripts turn it into deliverables — usable independently of a live scan, against any existing `reports/<run>` directory.
 
 ### Regenerate / re-brand the dashboard
 
@@ -309,14 +311,14 @@ node scripts/run-batch-audit.mjs --sites-file ./sites.txt --intensity light --sk
 All of the above are also reachable through the packaged CLI:
 
 ```bash
-node bin/universal-security-audit.mjs audit --site https://www.example.com
-node bin/universal-security-audit.mjs report --run-dir reports/<run-folder> --brand-config ./branding.json
-node bin/universal-security-audit.mjs tickets --run-dir reports/<run-folder>
-node bin/universal-security-audit.mjs compare --before reports/run-a --after reports/run-b
-node bin/universal-security-audit.mjs sarif --run-dir reports/<run-folder> --out results.sarif
-node bin/universal-security-audit.mjs baseline --run-dir reports/<run-folder> --out ./security-baseline.json
-node bin/universal-security-audit.mjs batch-audit --sites-file ./sites.txt
-node bin/universal-security-audit.mjs help
+node bin/justwhat-security-audit.mjs audit --site https://www.example.com
+node bin/justwhat-security-audit.mjs report --run-dir reports/<run-folder> --brand-config ./branding.json
+node bin/justwhat-security-audit.mjs tickets --run-dir reports/<run-folder>
+node bin/justwhat-security-audit.mjs compare --before reports/run-a --after reports/run-b
+node bin/justwhat-security-audit.mjs sarif --run-dir reports/<run-folder> --out results.sarif
+node bin/justwhat-security-audit.mjs baseline --run-dir reports/<run-folder> --out ./security-baseline.json
+node bin/justwhat-security-audit.mjs batch-audit --sites-file ./sites.txt
+node bin/justwhat-security-audit.mjs help
 ```
 
 ## Example workflows by site type / use case
@@ -326,7 +328,7 @@ node bin/universal-security-audit.mjs help
 For sites with lots of per-record pages (fundraiser/participant pages, product listings, forum threads, etc.) where you just want a quick, presentable snapshot rather than exhaustive coverage:
 
 ```bash
-node bin/universal-security-audit.mjs audit --site https://www.example.com \
+node bin/justwhat-security-audit.mjs audit --site https://www.example.com \
   --crawl --max-depth 2 --max-pages 25 --intensity light --respect-robots
 ```
 
@@ -337,7 +339,7 @@ node bin/universal-security-audit.mjs audit --site https://www.example.com \
 Fast and unauthenticated, but the active checks still need the client's written permission first (`--authorized` records that you have it):
 
 ```bash
-node bin/universal-security-audit.mjs audit --site https://www.example.com --intensity light --authorized
+node bin/justwhat-security-audit.mjs audit --site https://www.example.com --intensity light --authorized
 ```
 
 ### Full authenticated WordPress security review
@@ -345,10 +347,10 @@ node bin/universal-security-audit.mjs audit --site https://www.example.com --int
 Agency-style deep audit: create an Application Password in the client's wp-admin first (Users → Profile → Application Passwords), get a free [WPScan API key](https://wpscan.com/api), then:
 
 ```bash
-node bin/universal-security-audit.mjs audit --site https://www.example.com \
+node bin/justwhat-security-audit.mjs audit --site https://www.example.com \
   --wp-app-user admin --wp-app-password "xxxx xxxx xxxx xxxx xxxx xxxx" \
   --wpscan-key YOUR_WPSCAN_KEY --crawl --max-pages 50 --authorized
-node bin/universal-security-audit.mjs tickets --run-dir ./reports/<run-id>
+node bin/justwhat-security-audit.mjs tickets --run-dir ./reports/<run-id>
 ```
 
 Gives you plugin/theme CVEs, outdated inactive plugins nobody remembers installing, missing security plugins, and a ticket-ready backlog in one pass.
@@ -358,7 +360,7 @@ Gives you plugin/theme CVEs, outdated inactive plugins nobody remembers installi
 Same shape, form-login only (no Application Passwords in Drupal core):
 
 ```bash
-node bin/universal-security-audit.mjs audit --site https://www.example.com \
+node bin/justwhat-security-audit.mjs audit --site https://www.example.com \
   --login-url https://www.example.com/user/login --username admin --password your-password --authorized
 ```
 
@@ -367,7 +369,7 @@ node bin/universal-security-audit.mjs audit --site https://www.example.com \
 Payment-processor and PCI-scope questions matter most here; a full run already covers this, but it's worth calling out what to look at in the output — the `payment` category in `findings-summary.csv` and the "Payment/donation" card on the dashboard:
 
 ```bash
-node bin/universal-security-audit.mjs audit --site https://www.example.com
+node bin/justwhat-security-audit.mjs audit --site https://www.example.com
 ```
 
 Look for: a card-input form without a recognized tokenizing processor (Stripe/Square/Braintree/Authorize.Net) flagged `high`, missing HSTS/CSP on checkout pages, and mixed-content resources on any page that touches payment.
@@ -375,17 +377,17 @@ Look for: a card-input form without a recognized tokenizing processor (Stripe/Sq
 ### Staging / password-protected site (HTTP Basic Auth)
 
 ```bash
-node bin/universal-security-audit.mjs audit --site https://staging.example.com \
+node bin/justwhat-security-audit.mjs audit --site https://staging.example.com \
   --http-username staging-user --http-password staging-pass --respect-robots
 ```
 
 ### CI/CD gate on every deploy (GitHub Actions)
 
 ```bash
-node bin/universal-security-audit.mjs audit --site https://www.example.com \
+node bin/justwhat-security-audit.mjs audit --site https://www.example.com \
   --intensity light --skip-port-scan --skip-subdomain-enum --authorized \
   --baseline ./security-baseline.json --fail-on high --json > report.json
-node bin/universal-security-audit.mjs sarif --run-dir "$(ls -td reports/*/ | head -1)" --out results.sarif
+node bin/justwhat-security-audit.mjs sarif --run-dir "$(ls -td reports/*/ | head -1)" --out results.sarif
 ```
 
 Then upload `results.sarif` with `github/codeql-action/upload-sarif` so findings show up in the repo's Security tab. `--fail-on high` fails the build on anything high/critical that isn't already in the baseline; port scan/subdomain enum are skipped here since they're slower and less relevant to "did this deploy regress anything."
@@ -393,7 +395,7 @@ Then upload `results.sarif` with `github/codeql-action/upload-sarif` so findings
 ### Agency portfolio — many client sites on a schedule
 
 ```bash
-node bin/universal-security-audit.mjs batch-audit --sites-file ./client-sites.txt \
+node bin/justwhat-security-audit.mjs batch-audit --sites-file ./client-sites.txt \
   --intensity light --skip-cve --concurrency 2 --authorized
 ```
 
@@ -404,14 +406,14 @@ Pair with a cron/scheduled job and diff each site's `summary.json` week over wee
 Platform fingerprinting won't find a CMS to fingerprint here, so CVE/plugin-version checks won't have much to do — the value comes from headers, TLS, CORS, exposed paths, port scan, and PII/secret scanning instead:
 
 ```bash
-node bin/universal-security-audit.mjs audit --site https://app.example.com --skip-cve
+node bin/justwhat-security-audit.mjs audit --site https://app.example.com --skip-cve
 ```
 
 ### Confirm remediation actually worked
 
 ```bash
-node bin/universal-security-audit.mjs audit --site https://www.example.com --intensity light   # after fixes
-node bin/universal-security-audit.mjs compare --before ./reports/<before-run> --after ./reports/<after-run>
+node bin/justwhat-security-audit.mjs audit --site https://www.example.com --intensity light   # after fixes
+node bin/justwhat-security-audit.mjs compare --before ./reports/<before-run> --after ./reports/<after-run>
 ```
 
 Check `security-compare-summary.md` for the risk-grade delta and confirm the specific findings you fixed show up under "Resolved findings," not "New findings" (which would mean something regressed elsewhere).
@@ -421,7 +423,7 @@ Check `security-compare-summary.md` for the risk-grade delta and confirm the spe
 Maximum coverage, routed through Burp Suite so a human can inspect/replay anything interesting:
 
 ```bash
-node bin/universal-security-audit.mjs audit --site https://www.example.com \
+node bin/justwhat-security-audit.mjs audit --site https://www.example.com \
   --intensity aggressive --crawl --max-pages 100 \
   --wordlist ./my-wordlist.txt --proxy http://127.0.0.1:8080 \
   --wp-app-user admin --wp-app-password "xxxx xxxx xxxx xxxx xxxx xxxx" --wpscan-key YOUR_KEY --authorized

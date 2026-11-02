@@ -1,5 +1,5 @@
 {
-  "name": "@pbpyrojust/universal-security-audit",
+  "name": "@pbpyrojust/justwhat-security-audit",
   "version": "0.3.1",
   "type": "module",
   "packageManager": "pnpm@10.8.0",
@@ -12,11 +12,12 @@
     "sarif": "node scripts/generate-security-sarif.mjs",
     "baseline": "node scripts/generate-baseline.mjs",
     "batch-audit": "node scripts/run-batch-audit.mjs",
-    "cli": "node bin/universal-security-audit.mjs"
+    "cli": "node bin/justwhat-security-audit.mjs"
   },
   "bin": {
-    "universal-security-audit": "bin/universal-security-audit.mjs",
-    "usaudit": "bin/universal-security-audit.mjs"
+    "justwhat-security-audit": "bin/justwhat-security-audit.mjs",
+    "usaudit": "bin/justwhat-security-audit.mjs",
+    "universal-security-audit": "bin/justwhat-security-audit.mjs"
   },
   "dependencies": {
     "chrome-launcher": "^1.2.2",
@@ -29,13 +30,13 @@
   },
   "license": "MIT",
   "author": "Justin Adams (https://justwhat.net)",
-  "homepage": "https://github.com/pbpyrojust/universal-security-audit#readme",
+  "homepage": "https://github.com/pbpyrojust/justwhat-security-audit#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pbpyrojust/universal-security-audit.git"
+    "url": "git+https://github.com/pbpyrojust/justwhat-security-audit.git"
   },
   "bugs": {
-    "url": "https://github.com/pbpyrojust/universal-security-audit/issues"
+    "url": "https://github.com/pbpyrojust/justwhat-security-audit/issues"
   },
   "keywords": [
     "security",

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Turns findings-summary.csv into a ticket-ready backlog CSV, mirroring universal-seo-audit's
+// Turns findings-summary.csv into a ticket-ready backlog CSV, mirroring justwhat-seo-audit's
 // generate-seo-tickets.mjs conventions (global vs. per-URL grouping, ticket_title/description/labels).
 import fs from 'node:fs';
 import path from 'node:path';

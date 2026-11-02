@@ -185,7 +185,7 @@ async function maybePerformFormLogin(page, formAuth, slowMode = false) {
   }
 }
 
-// ── Terminal UI helpers (shared style with universal-seo-audit / universal-accessibility-audit) ──
+// ── Terminal UI helpers (shared style with justwhat-seo-audit / justwhat-accessibility-audit) ──
 const c = {
   reset: '\x1b[0m', bold: '\x1b[1m', dim: '\x1b[2m',
   red: '\x1b[31m', green: '\x1b[32m', yellow: '\x1b[33m',
@@ -212,7 +212,7 @@ function phaseDone(label, elapsed) { out(`    ${c.brightGreen}✔${c.reset} ${la
 function statusMsg(icon, color, msg) { out(`    ${color}${icon}${c.reset} ${msg}`); }
 
 // Live in-place progress (carriage-return updates, no trailing newline) — same pattern as
-// universal-seo-audit/universal-accessibility-audit. Writes to stderr instead of stdout when
+// justwhat-seo-audit/justwhat-accessibility-audit. Writes to stderr instead of stdout when
 // --json is set, same reasoning as out() above: keep stdout reserved for the final JSON document.
 function progressWrite(str) { (jsonOut ? process.stderr : process.stdout).write(str); }
 function clearProgressLine() { progressWrite('\r\x1b[K'); }

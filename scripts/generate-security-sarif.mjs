@@ -78,8 +78,8 @@ const sarif = {
   runs: [{
     tool: {
       driver: {
-        name: 'universal-security-audit',
-        informationUri: 'https://github.com/pbpyrojust/universal-security-audit',
+        name: 'justwhat-security-audit',
+        informationUri: 'https://github.com/pbpyrojust/justwhat-security-audit',
         version: '0.1.0',
         rules: [...rulesById.values()],
       },

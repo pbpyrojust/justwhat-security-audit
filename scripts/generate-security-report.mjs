@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Standalone report regenerator — rebuilds security-dashboard.html/.pdf from an existing run's
 // summary.json + CSVs without re-scanning the site. Useful for re-branding a past run or fixing
-// a report after a dashboard template change. Mirrors universal-seo-audit's
+// a report after a dashboard template change. Mirrors justwhat-seo-audit's
 // generate-visual-report.mjs --run-dir convention.
 import { pathToFileURL } from 'node:url';
 import fs from 'node:fs';

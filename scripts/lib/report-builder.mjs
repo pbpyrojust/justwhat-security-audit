@@ -1,6 +1,6 @@
 // ── Shared HTML dashboard builder, used both inline during a live audit run and by the
 // standalone scripts/generate-security-report.mjs (--run-dir) regenerator. Branding-aware so
-// reports can be white-labeled the same way universal-seo-audit's generate-visual-report.mjs is. ──
+// reports can be white-labeled the same way justwhat-seo-audit's generate-visual-report.mjs is. ──
 
 export const DEFAULT_BRANDING = {
   companyName: 'JustWhat Security Audit',

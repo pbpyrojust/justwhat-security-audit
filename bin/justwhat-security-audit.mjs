@@ -14,10 +14,10 @@ function run(script, args) {
 }
 
 function printHelp() {
-  console.log(`universal-security-audit
+  console.log(`justwhat-security-audit
 
 Usage:
-  universal-security-audit <command> [options]
+  justwhat-security-audit <command> [options]
 
 Commands:
   audit          Full security & attack-surface audit (headers, TLS protocol enumeration,
@@ -34,23 +34,23 @@ Commands:
   version        Show package version
 
 Examples:
-  universal-security-audit audit --site https://www.example.com
-  universal-security-audit audit --site https://www.example.com --crawl --max-pages 25
-  universal-security-audit audit --site https://www.example.com --authorized --intensity aggressive
-  universal-security-audit audit --site https://www.example.com --wordfence-key YOUR_KEY
-  universal-security-audit audit --site https://www.example.com --wpscan-key YOUR_KEY
-  universal-security-audit audit --site https://www.example.com --skip-exposed-paths --skip-recon
-  universal-security-audit audit --site https://www.example.com --login-url https://www.example.com/wp-login.php --username U --password P
-  universal-security-audit audit --site https://www.example.com --wp-app-user U --wp-app-password 'xxxx xxxx xxxx xxxx'
-  universal-security-audit audit --site https://www.example.com --proxy http://127.0.0.1:8080
-  universal-security-audit audit --site https://www.example.com --baseline ./security-baseline.json
-  universal-security-audit audit --site https://www.example.com --fail-on high --json > report.json
-  universal-security-audit report --run-dir ./reports/<run-id> --brand-config ./branding.json
-  universal-security-audit tickets --run-dir ./reports/<run-id>
-  universal-security-audit compare --before ./reports/<run-a> --after ./reports/<run-b>
-  universal-security-audit sarif --run-dir ./reports/<run-id> --out results.sarif
-  universal-security-audit baseline --run-dir ./reports/<run-id> --out ./security-baseline.json
-  universal-security-audit batch-audit --sites-file ./sites.txt --intensity light
+  justwhat-security-audit audit --site https://www.example.com
+  justwhat-security-audit audit --site https://www.example.com --crawl --max-pages 25
+  justwhat-security-audit audit --site https://www.example.com --authorized --intensity aggressive
+  justwhat-security-audit audit --site https://www.example.com --wordfence-key YOUR_KEY
+  justwhat-security-audit audit --site https://www.example.com --wpscan-key YOUR_KEY
+  justwhat-security-audit audit --site https://www.example.com --skip-exposed-paths --skip-recon
+  justwhat-security-audit audit --site https://www.example.com --login-url https://www.example.com/wp-login.php --username U --password P
+  justwhat-security-audit audit --site https://www.example.com --wp-app-user U --wp-app-password 'xxxx xxxx xxxx xxxx'
+  justwhat-security-audit audit --site https://www.example.com --proxy http://127.0.0.1:8080
+  justwhat-security-audit audit --site https://www.example.com --baseline ./security-baseline.json
+  justwhat-security-audit audit --site https://www.example.com --fail-on high --json > report.json
+  justwhat-security-audit report --run-dir ./reports/<run-id> --brand-config ./branding.json
+  justwhat-security-audit tickets --run-dir ./reports/<run-id>
+  justwhat-security-audit compare --before ./reports/<run-a> --after ./reports/<run-b>
+  justwhat-security-audit sarif --run-dir ./reports/<run-id> --out results.sarif
+  justwhat-security-audit baseline --run-dir ./reports/<run-id> --out ./security-baseline.json
+  justwhat-security-audit batch-audit --sites-file ./sites.txt --intensity light
 
 Pentest-style (active) checks need the site owner's written permission: pass --authorized,
 or answer "yes" when asked. Without it a run is passive only.
